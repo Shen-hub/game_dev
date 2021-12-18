@@ -134,6 +134,6 @@ function love.mousepressed(x, y, button)
         pipes[1].speed = 0.5
         pipes[2].speed = 0.5
         base.speed = 0.5
-        speed = 0
+        speed = 0.5
     end
  end
