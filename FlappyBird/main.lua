@@ -131,5 +131,8 @@ function love.mousepressed(x, y, button)
         pipes[2].x = width + width/2 + pipes[1].width
         score = 0
         status_score = false
+        pipes[1].speed = 0.5
+        pipes[2].speed = 0.5
+        base.speed = 0.5
     end
  end
