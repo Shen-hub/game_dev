@@ -26,7 +26,7 @@ function love.load()
 
     score = 0
     str = ""
-    boost = 0.1
+    boost = 0.2
     speed = 0.5
 
     gameover = love.graphics.newImage("assets/sprites/gameover.png")
@@ -130,5 +130,6 @@ function love.mousepressed(x, y, button)
         pipes[1].x = width
         pipes[2].x = width + width/2 + pipes[1].width
         score = 0
+        status_score = false
     end
  end
