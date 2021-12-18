@@ -17,7 +17,7 @@ end
 
 function Base:update(dt)
 	self.x = self.x - self.speed
-    if self.x == -width then
+    if self.x <= -width then
         self.x = 0
     end
 end

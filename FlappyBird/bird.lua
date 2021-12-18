@@ -15,7 +15,7 @@ function Bird:create()
 end
 
 function Bird:update(dt)
-	self.velocity = self.velocity +  self.gravity * dt
+	self.velocity = self.velocity + self.gravity * dt
 	if love.mouse.isDown(1) then
 		self.velocity = -5
 	end
@@ -23,24 +23,22 @@ function Bird:update(dt)
 end
 
 function Bird:draw()
-	if bird.velocity < 0 then
-		love.graphics.draw(bird.imageDown, bird.x, bird.y)
+	if self.velocity < 0 then
+		love.graphics.draw(bird.imageDown, self.x, self.y)
 	end
-	if bird.velocity == 0 then
-		love.graphics.draw(bird.imageMid, bird.x, bird.y)
+	if self.velocity == 0 then
+		love.graphics.draw(bird.imageMid, self.x, self.y)
 	end
-	if bird.velocity > 0 then
-		love.graphics.draw(bird.imageUp, bird.x, bird.y)
+	if self.velocity > 0 then
+		love.graphics.draw(bird.imageUp, self.x, self.y)
 	end
 end
 
 function Bird:checkCollision()
-	if bird.y <= 0 or bird.y >= base.y - bird.imageDown:getHeight() + 1
-	then
+	if self.y <= 0 or self.y + self.imageDown:getHeight() >= base.y	then
 		return true
 	else 
 		return false
 	end
-	--bird.y >= pipe.y or bird.y <= pipe.y + pipe.width
-	--and bird.x <= pipe.x or bird.x >= pipe.x + pipe.height
+
 end

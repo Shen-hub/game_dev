@@ -28,3 +28,12 @@ function Pipe:draw()
     love.graphics.draw(self.image, self.x + self.width, self.y - self.interval + self.rand, 3.14)
 end
 
+function Pipe:checkCollision()
+    if (bird.x + bird.imageDown:getWidth() >= self.x and bird.x <= self.x + self.width) and 
+    (bird.y <= self.y - self.interval + self.rand or bird.y + bird.imageDown:getHeight() >= self.y + self.interval + self.rand) then
+		return true
+	else 
+		return false
+	end
+end
+

@@ -26,9 +26,12 @@ function love.load()
 
     score = 0
     str = ""
+    boost = 0.1
+    speed = 0.5
 
     gameover = love.graphics.newImage("assets/sprites/gameover.png")
     game_status = 0
+    status_score = false
 end
 
 function love.update(dt)
@@ -41,24 +44,36 @@ function love.update(dt)
         --обновление птицы и нижней платформы
         bird:update(dt)
         base:update(dt)
-        
+
         for i, pipe in pairs(pipes) do
             pipe:update(dt)
+            if pipe:checkCollision() then
+                game_status = 2
+            end
         end
         --проверка на преодоление трубы
-        if bird.x == pipes[1].x + pipes[1].width  then
-            score = score + 1
+        if bird.x >= pipes[1].x + pipes[1].width or bird.x >= pipes[2].x + pipes[2].width  then
+            if status_score == false then
+                score = score + 1
+                status_score = true
+                speed = speed + boost
+                pipes[1].speed = speed
+                pipes[2].speed = speed
+                base.speed = speed
+            end
         end
-        if bird.x == pipes[2].x + pipes[2].width  then
-            score = score + 1
-        end
+
 
         --проверка на вышедшую трубу за границу экрана и пересоздание новой трубы
         if pipes[1].x + pipes[1].width <= 0 then
             pipes[1] = Pipe:create(width + pipes[2].width,  height)
+            pipes[1].speed = speed
+            status_score = false
         end
         if pipes[2].x + pipes[2].width <= 0 then
             pipes[2] = Pipe:create(width + pipes[1].width, height)
+            pipes[2].speed = speed
+            status_score = false
         end
     end
 end
